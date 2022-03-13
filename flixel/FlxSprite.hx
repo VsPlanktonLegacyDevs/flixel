@@ -877,9 +877,15 @@ class FlxSprite extends FlxObject
 
 		useColorTransform = alpha != 1 || color != 0xffffff;
 		if (useColorTransform)
-			colorTransform.setMultipliers(color.redFloat, color.greenFloat, color.blueFloat, alpha);
+		{
+			colorTransform.setMultipliers(colorTransform.redFloat - color.alphaFloat, colorTransform.greenFloat - color.alphaFloat, colorTransform.blueFloat - color.alphaFloat, alpha);
+			colorTransform.setOffsets(Math.round(color.red * (color.alphaFloat - 0.01)), Math.round(color.green * (color.alphaFloat - 0.01)), Math.round(color.red * (color.alphaFloat - 0.01)), 0);
+		}
 		else
+		{
 			colorTransform.setMultipliers(1, 1, 1, 1);
+			colorTransform.setOffsets(0, 0, 0, 0);
+		}
 
 		dirty = true;
 	}
