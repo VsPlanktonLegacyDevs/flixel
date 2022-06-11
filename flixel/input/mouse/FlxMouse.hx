@@ -96,6 +96,11 @@ class FlxMouse extends FlxPointer implements IFlxInputManager
 	 */
 	public var justPressedTimeInTicks(get, never):Int;
 
+	/**
+	 * Helper for the right click menu (context menu). For now just has a field to suppress it.
+	 */
+	public var rightClickMenu = new RightClickMenu();
+
 	#if FLX_MOUSE_ADVANCED
 	/**
 	 * Check to see if the right mouse button is currently pressed.
@@ -720,6 +725,29 @@ class FlxMouse extends FlxPointer implements IFlxInputManager
 		_globalScreenX = record.x;
 		_globalScreenY = record.y;
 		updatePositions();
+	}
+}
+
+/**
+ * For now it's just helper to show or hide the right click menu, but more may get added later.
+ */
+class RightClickMenu
+{
+	/**
+	 * Whether the context menu will appear when the right mouse button is clicked.
+	 */
+	public var suppress(get, set):Bool;
+	
+	public function new() { }
+	
+	inline function get_suppress()
+	{
+		return !FlxG.stage.showDefaultContextMenu;
+	}
+	
+	inline function set_suppress(value:Bool)
+	{
+		return FlxG.stage.showDefaultContextMenu = !value;
 	}
 }
 #end
