@@ -308,6 +308,7 @@ class FlxGame extends Sprite
 	/**
 	 * Used to instantiate the guts of the flixel game object once we have a valid reference to the root.
 	 */
+	@:haxe.warning("-WDeprecated") // remove in 6.0.0
 	function create(_):Void
 	{
 		if (stage == null)
@@ -463,6 +464,7 @@ class FlxGame extends Sprite
 	}
 
 	@:allow(flixel.FlxG)
+	@:haxe.warning("-WDeprecated")
 	function onResize(_):Void
 	{
 		var width:Int = FlxG.stage.stageWidth;
